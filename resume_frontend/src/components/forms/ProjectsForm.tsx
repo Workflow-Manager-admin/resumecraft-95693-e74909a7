@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { useFormContext } from '../FormProvider'
+import { useResumeContext } from '@/contexts/ResumeContext'
 import { Code, Plus, Trash2, Link, X } from 'lucide-react'
 import { Project } from '@/types/resume'
 
 // PUBLIC_INTERFACE
 export function ProjectsForm() {
-  const { resumeData, setResumeData } = useFormContext()
+  const { resumeData, setResumeData } = useResumeContext()
 
   const addProject = () => {
     const newProject: Project = {

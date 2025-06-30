@@ -1,11 +1,11 @@
 'use client'
 
-import { useFormContext } from '../FormProvider'
+import { useResumeContext } from '@/contexts/ResumeContext'
 import { User, Mail, Phone, MapPin, Linkedin, Globe } from 'lucide-react'
 
 // PUBLIC_INTERFACE
 export function PersonalInfoForm() {
-  const { resumeData, setResumeData } = useFormContext()
+  const { resumeData, setResumeData } = useResumeContext()
 
   const updatePersonalInfo = (field: string, value: string) => {
     setResumeData(prev => ({

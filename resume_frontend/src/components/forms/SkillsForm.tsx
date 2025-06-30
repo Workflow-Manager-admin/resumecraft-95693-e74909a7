@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { useFormContext } from '../FormProvider'
+import { useResumeContext } from '@/contexts/ResumeContext'
 import { Star, Plus, X } from 'lucide-react'
 
 // PUBLIC_INTERFACE
 export function SkillsForm() {
-  const { resumeData, setResumeData } = useFormContext()
+  const { resumeData, setResumeData } = useResumeContext()
   const [newSkill, setNewSkill] = useState('')
 
   const addSkill = () => {

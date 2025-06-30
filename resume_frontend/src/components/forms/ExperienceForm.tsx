@@ -1,12 +1,12 @@
 'use client'
 
-import { useFormContext } from '../FormProvider'
+import { useResumeContext } from '@/contexts/ResumeContext'
 import { Briefcase, Plus, Trash2, Calendar } from 'lucide-react'
 import { Experience } from '@/types/resume'
 
 // PUBLIC_INTERFACE
 export function ExperienceForm() {
-  const { resumeData, setResumeData } = useFormContext()
+  const { resumeData, setResumeData } = useResumeContext()
 
   const addExperience = () => {
     const newExperience: Experience = {

@@ -1,11 +1,11 @@
 'use client'
 
-import { useFormContext } from '../FormProvider'
+import { useResumeContext } from '@/contexts/ResumeContext'
 import { FileText } from 'lucide-react'
 
 // PUBLIC_INTERFACE
 export function SummaryForm() {
-  const { resumeData, setResumeData } = useFormContext()
+  const { resumeData, setResumeData } = useResumeContext()
 
   const updateSummary = (value: string) => {
     setResumeData(prev => ({

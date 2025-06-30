@@ -1,12 +1,12 @@
 'use client'
 
-import { useFormContext } from '../FormProvider'
+import { useResumeContext } from '@/contexts/ResumeContext'
 import { GraduationCap, Plus, Trash2, Calendar } from 'lucide-react'
 import { Education } from '@/types/resume'
 
 // PUBLIC_INTERFACE
 export function EducationForm() {
-  const { resumeData, setResumeData } = useFormContext()
+  const { resumeData, setResumeData } = useResumeContext()
 
   const addEducation = () => {
     const newEducation: Education = {

@@ -1,35 +1,22 @@
 'use client'
 
-import { useState } from 'react'
+import Link from 'next/link'
 import { FormProvider } from '@/components/FormProvider'
 import { FormStep } from '@/components/FormStep'
-import { ResumePreview } from '@/components/ResumePreview'
-import { TemplateSelector } from '@/components/TemplateSelector'
 import { StepNavigation } from '@/components/StepNavigation'
-import { PrintDownloadActions } from '@/components/PrintDownloadActions'
-import { ResumeData, TemplateType } from '@/types/resume'
+import { useResumeContext } from '@/contexts/ResumeContext'
 import { getSampleResumeData } from '@/utils/sampleData'
-import { Eye } from 'lucide-react'
+import { Eye, FileText, ArrowRight, RotateCcw } from 'lucide-react'
 
 // PUBLIC_INTERFACE
 export default function Home() {
-  const [currentStep, setCurrentStep] = useState(0)
-  const [selectedTemplate, setSelectedTemplate] = useState<TemplateType>('modern')
-  const [resumeData, setResumeData] = useState<ResumeData>({
-    personalInfo: {
-      fullName: '',
-      email: '',
-      phone: '',
-      location: '',
-      linkedIn: '',
-      portfolio: ''
-    },
-    summary: '',
-    experience: [],
-    education: [],
-    skills: [],
-    projects: []
-  })
+  const { 
+    resumeData, 
+    setResumeData, 
+    currentStep, 
+    setCurrentStep,
+    clearData
+  } = useResumeContext()
 
   const steps = [
     'Personal Info',
@@ -51,18 +38,27 @@ export default function Home() {
           <header className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">Resume Builder</h1>
             <p className="text-gray-600 mb-4">Create your professional resume in minutes</p>
-            <button
-              onClick={loadSampleData}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors text-sm"
-            >
-              <Eye className="w-4 h-4" />
-              Load Sample Data
-            </button>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={loadSampleData}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors text-sm"
+              >
+                <Eye className="w-4 h-4" />
+                Load Sample Data
+              </button>
+              <button
+                onClick={clearData}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm"
+              >
+                <RotateCcw className="w-4 h-4" />
+                Clear All Data
+              </button>
+            </div>
           </header>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="max-w-4xl mx-auto">
             {/* Form Section */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
               <StepNavigation
                 steps={steps}
                 currentStep={currentStep}
@@ -80,23 +76,26 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Preview Section */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">Preview</h2>
-                <PrintDownloadActions resumeData={resumeData} template={selectedTemplate} />
+            {/* Preview Action Section */}
+            <div className="bg-white rounded-lg shadow-lg p-6 text-center">
+              <div className="mb-6">
+                <FileText className="w-16 h-16 mx-auto text-blue-600 mb-4" />
+                <h2 className="text-2xl font-semibold text-gray-900 mb-2">Ready to Preview?</h2>
+                <p className="text-gray-600 mb-6">
+                  View your resume with different templates and download when ready
+                </p>
               </div>
               
-              <TemplateSelector
-                selectedTemplate={selectedTemplate}
-                onTemplateChange={setSelectedTemplate}
-              />
+              <Link
+                href="/preview"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-lg font-medium"
+              >
+                Preview Resume
+                <ArrowRight className="w-5 h-5" />
+              </Link>
               
-              <div className="mt-6">
-                <ResumePreview
-                  data={resumeData}
-                  template={selectedTemplate}
-                />
+              <div className="mt-4 text-sm text-gray-500">
+                Your progress is automatically saved
               </div>
             </div>
           </div>
