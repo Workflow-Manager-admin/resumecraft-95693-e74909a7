@@ -3,103 +3,163 @@ import { ResumeData } from "../ResumeForm";
 
 /**
  * PUBLIC_INTERFACE
- * Simple resume template: clean, understated, thin borders.
+ * Simple, clean resume template with minimalist design and excellent readability
  */
 export default function SimpleTemplate({ data }: { data: ResumeData }) {
   return (
-    <div
-      style={{
-        maxWidth: 720,
-        margin: "0 auto",
-        fontFamily: "Arial,Helvetica,sans-serif",
-        background: "#fafbfc",
-        color: "#222",
-        boxShadow: "0 2px 8px rgba(100, 100, 100, 0.07)",
-        padding: "30px 24px 24px 24px",
-        border: "1px solid #e6e8f0",
-        borderRadius: 6,
-      }}
-    >
-      <header style={{ borderBottom: "1px solid #ddd", paddingBottom: 6, marginBottom: 12 }}>
-        <h2 style={{ fontSize: 30, fontWeight: 600, color: "#171717" }}>{data.personal.name || "Your Name"}</h2>
-        <span style={{ fontSize: 14, color: "#666" }}>{data.personal.email}</span>
-        {data.personal.phone && <span> | {data.personal.phone}</span>}
-        {data.personal.location && <span> | {data.personal.location}</span>}
+    <div className="max-w-4xl mx-auto bg-white text-gray-800 leading-relaxed">
+      {/* Header */}
+      <header className="text-center border-b border-gray-300 pb-8 mb-8">
+        <h1 className="text-4xl md:text-5xl font-light text-gray-900 mb-4 tracking-wide">
+          {data.personal.name || "Your Name"}
+        </h1>
+        
+        <div className="flex flex-wrap justify-center items-center gap-6 text-gray-600 mb-6">
+          {data.personal.email && <span>{data.personal.email}</span>}
+          {data.personal.phone && <span>{data.personal.phone}</span>}
+          {data.personal.location && <span>{data.personal.location}</span>}
+        </div>
+        
         {data.personal.summary && (
-          <p style={{ fontSize: 15, color: "#4a5458", marginTop: 7 }}>{data.personal.summary}</p>
+          <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
+            {data.personal.summary}
+          </p>
         )}
       </header>
+
+      {/* Work Experience */}
       {data.work.length > 0 && (
-        <section style={{ marginBottom: 12 }}>
-          <SectionTitle title="Work Experience" />
-          {data.work.map((job, idx) => (
-            <div key={idx} style={{ marginBottom: 8 }}>
-              <div>
-                <b>{job.position}</b> <span style={{ color: "#56697a" }}>@ {job.company}</span>
-                <span style={{ marginLeft: 14, fontSize: 12, color: "#aaa" }}>
-                  {job.start && `${job.start}`}{job.end ? ` - ${job.end}` : " - Present"}
-                </span>
+        <section className="mb-10">
+          <SectionTitle title="Professional Experience" />
+          
+          <div className="space-y-8">
+            {data.work.map((job, idx) => (
+              <div key={idx}>
+                <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-3">
+                  <div>
+                    <h3 className="text-xl font-medium text-gray-900">
+                      {job.position || "Position Title"}
+                    </h3>
+                    <div className="text-lg text-gray-600">
+                      {job.company || "Company Name"}
+                    </div>
+                  </div>
+                  
+                  <div className="text-gray-500 text-sm font-mono bg-gray-100 px-3 py-1 rounded">
+                    {job.start && new Date(job.start + "-01").toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                    {job.start && " — "}
+                    {job.end ? new Date(job.end + "-01").toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : "Present"}
+                  </div>
+                </div>
+                
+                {job.description && (
+                  <div className="text-gray-700 whitespace-pre-line leading-relaxed pl-0">
+                    {job.description}
+                  </div>
+                )}
               </div>
-              {job.description && (
-                <div style={{ whiteSpace: "pre-line", fontSize: 14, color: "#4c4c4c" }}>{job.description}</div>
-              )}
-            </div>
-          ))}
-        </section>
-      )}
-      {data.education.length > 0 && (
-        <section style={{ marginBottom: 12 }}>
-          <SectionTitle title="Education" />
-          {data.education.map((ed, idx) => (
-            <div key={idx} style={{ marginBottom: 8 }}>
-              <b>{ed.degree}</b> at <span style={{ color: "#56697a" }}>{ed.school}</span>
-              <span style={{ marginLeft: 14, fontSize: 12, color: "#aaa" }}>
-                {ed.start && `${ed.start}`}{ed.end ? ` - ${ed.end}` : " - Present"}
-              </span>
-              {ed.description && (
-                <div style={{ whiteSpace: "pre-line", fontSize: 14, color: "#4c4c4c" }}>{ed.description}</div>
-              )}
-            </div>
-          ))}
-        </section>
-      )}
-      {data.skills.length > 0 && (
-        <section style={{ marginBottom: 10 }}>
-          <SectionTitle title="Skills" />
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.40em" }}>
-            {data.skills.map((s, i) => (
-              <span key={i} style={{
-                border: "1px solid #e6e8f0",
-                borderRadius: 16,
-                padding: "0.32em 0.85em",
-                fontSize: 13,
-                marginBottom: 2
-              }}>{s}</span>
             ))}
           </div>
         </section>
       )}
-      {data.projects.length > 0 && (
-        <section>
-          <SectionTitle title="Projects" />
-          {data.projects.map((p, i) => (
-            <div key={i} style={{ marginBottom: 9 }}>
-              <b>{p.name}</b>
-              {p.url && (
-                <a href={p.url} style={{ color: "#2563eb", fontSize: 14, marginLeft: 8 }} target="_blank" rel="noopener noreferrer">
-                  [{p.url}]
-                </a>
-              )}
-              <div style={{ whiteSpace: "pre-line", fontSize: 14, color: "#4c4c4c" }}>
-                {p.description}
+
+      {/* Education */}
+      {data.education.length > 0 && (
+        <section className="mb-10">
+          <SectionTitle title="Education" />
+          
+          <div className="space-y-6">
+            {data.education.map((edu, idx) => (
+              <div key={idx}>
+                <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-2">
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900">
+                      {edu.degree || "Degree"}
+                    </h3>
+                    <div className="text-gray-600">
+                      {edu.school || "School Name"}
+                    </div>
+                  </div>
+                  
+                  <div className="text-gray-500 text-sm font-mono">
+                    {edu.start && new Date(edu.start + "-01").toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                    {edu.start && " — "}
+                    {edu.end ? new Date(edu.end + "-01").toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : "Present"}
+                  </div>
+                </div>
+                
+                {edu.description && (
+                  <div className="text-gray-700 whitespace-pre-line text-sm">
+                    {edu.description}
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Skills */}
+      {data.skills.length > 0 && (
+        <section className="mb-10">
+          <SectionTitle title="Skills" />
+          
+          <div className="flex flex-wrap gap-3">
+            {data.skills.map((skill, i) => (
+              <span
+                key={i}
+                className="px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 bg-gray-50"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Projects */}
+      {data.projects.length > 0 && (
+        <section className="mb-8">
+          <SectionTitle title="Projects" />
+          
+          <div className="space-y-6">
+            {data.projects.map((project, i) => (
+              <div key={i}>
+                <div className="flex flex-col md:flex-row md:items-baseline gap-2 mb-2">
+                  <h3 className="text-lg font-medium text-gray-900">
+                    {project.name || "Project Name"}
+                  </h3>
+                  
+                  {project.url && (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-700 text-sm underline"
+                    >
+                      {project.url}
+                    </a>
+                  )}
+                </div>
+                
+                {project.description && (
+                  <div className="text-gray-700 whitespace-pre-line leading-relaxed">
+                    {project.description}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </section>
       )}
     </div>
   );
 }
+
 function SectionTitle({ title }: { title: string }) {
-  return <h3 style={{ fontSize: 18, color: "#2563eb", marginBottom: 5, fontWeight: 500 }}>{title}</h3>;
+  return (
+    <h2 className="text-2xl font-light text-gray-900 mb-6 pb-2 border-b border-gray-200 tracking-wide">
+      {title}
+    </h2>
+  );
 }
