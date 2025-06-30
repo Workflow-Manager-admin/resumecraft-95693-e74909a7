@@ -7,7 +7,7 @@ import ElegantTemplate from "./templates/ElegantTemplate";
 
 /**
  * PUBLIC_INTERFACE
- * Preview panel for the resume with download and print buttons.
+ * Preview panel for the resume with download and print buttons, styled for modern/minimal experience.
  */
 type Props = {
   resume: ResumeData;
@@ -66,18 +66,18 @@ export default function ResumePreview({ resume, templateKey }: Props) {
   const TemplateComponent = TEMPLATES[templateKey] || ModernTemplate;
 
   return (
-    <div className="rounded-xl bg-background border border-secondary/50 p-3 pb-5 shadow-sm relative overflow-auto max-w-[900px] mx-auto">
-      <div className="flex items-center justify-end gap-2 mb-2">
+    <div className="rounded-2xl bg-white/90 border border-secondary/25 p-4 pb-6 shadow-xl relative overflow-x-auto max-w-[900px] mx-auto transition-all resume-preview-wrap">
+      <div className="flex items-center justify-end gap-3 mb-1 mr-2">
         <button
           onClick={handleDownload}
-          className="text-xs px-3 py-1 rounded-full border bg-accent/90 text-white border-accent hover:bg-accent/95"
+          className="text-xs px-4 py-1.5 select-none rounded-full border-2 font-semibold tracking-tight border-accent bg-accent text-white hover:bg-accent/90 shadow transition-all outline-none focus:ring-2 focus:ring-primary/40"
           title="Download as HTML"
         >
           Download
         </button>
         <button
           onClick={handlePrint}
-          className="text-xs px-3 py-1 rounded-full border border-primary text-primary hover:bg-primary/10"
+          className="text-xs px-4 py-1.5 select-none rounded-full border-2 border-primary text-primary font-semibold tracking-tight bg-white hover:bg-primary/10 shadow-sm transition-all outline-none focus:ring-2 focus:ring-accent/40"
           title="Print"
         >
           Print
@@ -94,10 +94,14 @@ export default function ResumePreview({ resume, templateKey }: Props) {
           border-radius: 12px;
           margin: 0 auto;
           background: #fff;
-          min-height: 500px;
+          min-height: 520px;
+          box-shadow: 0 3px 24px 0 rgba(85, 118, 180, 0.10);
         }
         @media (max-width: 700px) {
-          .print-preview { padding: 8px 0; }
+          .print-preview { padding: 7px 1px; }
+        }
+        @media (max-width: 480px) {
+          .print-preview { padding: 2px 0; min-height: 410px;}
         }
       `}</style>
     </div>

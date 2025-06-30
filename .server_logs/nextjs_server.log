@@ -1,0 +1,41 @@
+
+> nextjs@0.1.0 dev
+> next dev -p 3000 -H 0.0.0.0
+
+   ▲ Next.js 15.2.3
+   - Local:        http://localhost:3000
+   - Network:      http://0.0.0.0:3000
+
+ ✓ Starting...
+ ✓ Ready in 1612ms
+ ○ Compiling / ...
+ ✓ Compiled / in 4.6s (726 modules)
+ GET / 200 in 4891ms
+ ⚠ Blocked cross-origin request from vscode-internal-717-beta.beta01.cloud.kavia.ai. To allow this, configure "allowedDevOrigins" in next.config
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET / 200 in 45ms
+ ✓ Compiled /favicon.ico in 268ms (395 modules)
+ GET /favicon.ico 200 in 578ms
+ GET /favicon.ico 200 in 208ms
+ GET / 200 in 104ms
+ GET /favicon.ico 200 in 208ms
+ ✓ Compiled in 469ms (724 modules)
+ GET / 200 in 112ms
+ GET / 200 in 14ms
+ GET / 200 in 14ms
+ ✓ Compiled in 237ms (724 modules)
+ GET / 200 in 51ms
+ GET / 200 in 18ms
+ GET / 200 in 14ms
+ ✓ Compiled in 233ms (708 modules)
+ GET / 200 in 112ms
+ GET / 200 in 17ms
+ GET / 200 in 13ms
+ ✓ Compiled in 483ms (708 modules)
+ GET / 200 in 90ms
+ GET / 200 in 17ms
+ GET / 200 in 14ms
+ ✓ Compiled in 270ms (708 modules)
+ GET / 200 in 61ms
+ GET / 200 in 15ms
+ GET / 200 in 14ms

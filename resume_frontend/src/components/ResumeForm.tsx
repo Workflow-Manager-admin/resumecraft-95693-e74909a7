@@ -549,47 +549,91 @@ export default function ResumeForm({
       <style jsx>{`
         .input {
           width: 100%;
-          border-radius: 0.375rem;
-          border: 1px solid var(--tw-prose-hr, #64748b33);
-          padding: 0.5em 0.65em;
-          margin-top: 0.25em;
+          border-radius: 0.55em;
+          border: 1.3px solid var(--secondary, #64748b33);
+          padding: 0.54em 0.748em;
+          margin-top: 0.22em;
           color: inherit;
-          background: transparent;
+          background: #f8fafc;
           outline: none;
           font-size: 1em;
+          transition: border-color 0.18s, box-shadow 0.12s;
+          box-sizing: border-box;
+        }
+        :global(.dark) .input {
+          background: #191c20;
+          color: #ececec;
+          border-color: #2d3748;
         }
         .input:focus {
-          border-color: #2563eb99;
+          border-color: var(--primary, #2563eb);
+          box-shadow: 0 0 0 2px var(--primary, #2563eb28);
         }
         .button {
-          padding: 0.5em 1.15em;
-          border: 1px solid;
+          padding: 0.58em 1.22em;
+          border: 2px solid var(--accent, #f59e42);
           border-radius: 1.1em;
-          background: transparent;
-          color: inherit;
+          background: var(--accent, #f59e42);
+          color: #fff;
           cursor: pointer;
           font-size: 1em;
-          transition: border-color 0.18s;
+          font-weight: 500;
+          margin-top: 2px;
+          margin-bottom: 2px;
+          transition: border-color 0.15s, background 0.15s, color 0.13s, box-shadow 0.11s;
+          outline: none;
+          box-shadow: 0 1.5px 8px 0 rgba(245, 158, 66, 0.055);
         }
         .button:hover {
-          border-color: #2563eb;
+          border-color: var(--primary, #2563eb);
+          background: var(--primary, #2563eb);
+          color: #fff;
+        }
+        .button:active {
+          background: #f59f42e4;
         }
         .stepButton {
           flex: 1 1 0;
-          border: 1px solid;
-          border-radius: 10px;
-          padding: 0.35em 0.4em;
+          border: 2px solid;
+          border-radius: 12px;
+          padding: 0.41em 0.6em;
           background: none;
-          color: inherit;
+          color: var(--secondary, #64748b);
           cursor: pointer;
           margin-right: 2px;
-          transition: border-color 0.15s, background 0.15s;
+          margin-bottom: 1.5px;
+          transition: border-color 0.17s, background 0.13s, color 0.13s;
           min-width: 0;
           white-space: nowrap;
+          font-family: inherit;
+          box-shadow: none;
+          outline: none;
         }
         .stepButton:disabled {
-          opacity: 0.44;
+          opacity: 0.37;
           cursor: not-allowed;
+        }
+        .stepButton {
+          border-color: #d1d5db;
+          background: #fafbfc;
+        }
+        .stepButton.border-primary,
+        .stepButton:focus,
+        .stepButton[aria-pressed="true"] {
+          border-color: var(--primary, #2563eb);
+          color: var(--primary, #2563eb);
+          background: #ecf3ff;
+          font-weight: 600;
+        }
+        @media (max-width: 700px) {
+          .stepButton,
+          .button {
+            font-size: 0.87em;
+            padding: 0.40em 0.7em;
+          }
+          .input {
+            font-size: 0.98em;
+          }
         }
       `}</style>
     </form>

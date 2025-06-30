@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
+/* --- Modern Resume Builder Palette Vars --- */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #2563eb;
+  --secondary: #64748b;
+  --accent: #f59e42;
+  --primary-hover: #1d48b5;
+  --border: #e5e7eb;
+  --radius: 0.8rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans, Inter, Arial, "Helvetica Neue", Helvetica, sans-serif);
+  --font-mono: var(--font-geist-mono, "Fira Mono", monospace);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --border: #3e4a59;
+    --primary: #2563eb;
+    --secondary: #64748b;
+    --accent: #f59e42;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  font-size: 16px;
+  scroll-behavior: smooth;
 }
+
+input, button, textarea, select {
+  font-family: inherit;
+  font-size: 1em;
+  color: inherit;
+}
+
+/* Remove native blue highlight on mobile tap */
+input:focus, textarea:focus, select:focus, button:focus {
+  outline: 2px solid var(--primary, #2563eb);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar { width: 8px; background: var(--background); }
+::-webkit-scrollbar-thumb { background: #e4e8ef; border-radius: 8px; }
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb { background: #222b36; }
+}
+
+/* Split screen layout tweaks for all screen sizes */
+@media (max-width: 1023px) {
+  .resume-main-flex {
+    flex-direction: column !important;
+    gap: 2.3rem !important;
+  }
+  .resume-preview-wrap {
+    margin-top: 10px !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .resume-preview-wrap > .print-preview {
+    padding: 4px 0 !important;
+  }
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Soft fade for footer, subtle shadows for cards, etc. */
+footer {
+  opacity: 0.76;
+  color: var(--secondary);
+}
+
+/* Add fade/appear animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.fade-in {
+  animation: fadeIn 0.6s cubic-bezier(.33,.86,.46,1) both;
+}
+
+/* Template selector badge ring on focus */
+.button:focus, .stepButton:focus {
+  box-shadow: 0 0 0 2.5px var(--accent, #f59e42);
+}
+
+/* Util for accent text */
+.text-accent { color: var(--accent, #f59e42); }
+.bg-accent { background: var(--accent, #f59e42); }
+
