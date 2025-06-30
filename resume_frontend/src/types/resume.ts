@@ -43,4 +43,4 @@ export interface ResumeData {
   projects: Project[]
 }
 
-export type TemplateType = 'modern' | 'classic' | 'creative'
+export type TemplateType = 'modern' | 'classic' | 'creative' | 'professional' | 'minimal'

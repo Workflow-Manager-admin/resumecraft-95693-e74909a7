@@ -4,6 +4,8 @@ import { ResumeData, TemplateType } from '@/types/resume'
 import { ModernTemplate } from './templates/ModernTemplate'
 import { ClassicTemplate } from './templates/ClassicTemplate'
 import { CreativeTemplate } from './templates/CreativeTemplate'
+import { ProfessionalTemplate } from './templates/ProfessionalTemplate'
+import { MinimalTemplate } from './templates/MinimalTemplate'
 
 interface ResumePreviewProps {
   data: ResumeData
@@ -20,6 +22,10 @@ export function ResumePreview({ data, template }: ResumePreviewProps) {
         return <ClassicTemplate data={data} />
       case 'creative':
         return <CreativeTemplate data={data} />
+      case 'professional':
+        return <ProfessionalTemplate data={data} />
+      case 'minimal':
+        return <MinimalTemplate data={data} />
       default:
         return <ModernTemplate data={data} />
     }

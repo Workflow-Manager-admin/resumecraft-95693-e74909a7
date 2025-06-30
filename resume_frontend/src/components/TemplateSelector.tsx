@@ -25,6 +25,18 @@ const templates = [
     name: 'Creative',
     description: 'Bold and eye-catching design',
     preview: 'bg-gradient-to-br from-orange-50 to-orange-100'
+  },
+  {
+    id: 'professional' as TemplateType,
+    name: 'Professional',
+    description: 'Corporate-focused structured layout',
+    preview: 'bg-gradient-to-br from-slate-50 to-slate-100'
+  },
+  {
+    id: 'minimal' as TemplateType,
+    name: 'Minimal',
+    description: 'Simple and elegant typography',
+    preview: 'bg-gradient-to-br from-gray-100 to-white'
   }
 ]
 
@@ -33,7 +45,7 @@ export function TemplateSelector({ selectedTemplate, onTemplateChange }: Templat
   return (
     <div className="space-y-3">
       <h3 className="text-sm font-medium text-gray-700">Choose Template</h3>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-5 gap-2">
         {templates.map((template) => (
           <button
             key={template.id}
