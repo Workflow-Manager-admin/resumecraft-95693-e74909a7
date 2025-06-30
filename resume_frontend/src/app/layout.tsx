@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -19,8 +19,6 @@ export const metadata: Metadata = {
   description: "Create stunning, professional resumes with our modern resume builder. Choose from multiple templates, get real-time previews, and download instantly.",
   keywords: "resume builder, cv maker, professional resume, job application, career tools",
   authors: [{ name: "ResumeCraft" }],
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#2563eb",
   robots: "index, follow",
   openGraph: {
     title: "ResumeCraft - Professional Resume Builder",
@@ -33,6 +31,12 @@ export const metadata: Metadata = {
     title: "ResumeCraft - Professional Resume Builder",
     description: "Create stunning resumes with our modern builder",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#2563eb",
 };
 
 export default function RootLayout({
